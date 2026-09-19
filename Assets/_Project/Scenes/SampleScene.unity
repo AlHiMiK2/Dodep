@@ -2648,6 +2648,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4773129627738864, guid: 513f6ba8cd6a44d10b5129836d70c8a5, type: 3}
   m_PrefabInstance: {fileID: 72459293}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &73415966 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8950254842952169355, guid: 2bdc770fd16c19b4e84a5c4037eb01a3, type: 3}
+  m_PrefabInstance: {fileID: 4851281569117433224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &73490880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -79243,6 +79248,10 @@ PrefabInstance:
       propertyPath: m_RenderingLayerMask
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5587971919230302615, guid: 2bdc770fd16c19b4e84a5c4037eb01a3, type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 73415966}
     - target: {fileID: 5898361103862031773, guid: 2bdc770fd16c19b4e84a5c4037eb01a3, type: 3}
       propertyPath: m_RenderingLayerMask
       value: 1

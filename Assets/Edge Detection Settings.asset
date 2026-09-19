@@ -31,7 +31,7 @@ MonoBehaviour:
   sectionTextureChannel: 0
   vertexColorChannel: 0
   kernel: 0
-  outlineThickness: 3
+  outlineThickness: 2
   scaleWithResolution: 1
   referenceResolution: 2
   customResolution: 0
@@ -61,4 +61,4 @@ MonoBehaviour:
   maskInfluence: 15
   showSectionMapSection: 0
   showDiscontinuitySection: 0
-  showOutlineSection: 0
+  showOutlineSection: 1

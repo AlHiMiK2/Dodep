@@ -6,12 +6,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpHeight;
     [SerializeField] private float _crouchHeight;
+    [SerializeField] private Transform _camera;
 
     private CharacterController _controller;
     private float _gravity;
     private Vector3 _velocity;
     private float _characterHeight;
     private Vector3 _characterCenter;
+    private Vector3 _cameraStartPosition;
     
     public bool IsWalking { get; private set; }
     public Vector3 Velocity => _controller.velocity;
@@ -21,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _characterHeight = _controller.height;
         _characterCenter = _controller.center;
+        _cameraStartPosition = _camera.localPosition;
     }
 
     private void Update()
@@ -28,20 +31,30 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")); 
         direction = Vector3.ClampMagnitude(direction, 1f);
 
+        float subtract = _characterHeight - _crouchHeight;
+        
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-            float subtract = _characterHeight - _crouchHeight;
             _controller.height = _crouchHeight;
-            _controller.center = new Vector3(_characterCenter.x, _characterCenter.y + subtract * 0.5f, _characterCenter.z);
-            _controller.Move(Vector3.up * -subtract);
+
+            if (_controller.isGrounded)
+            {
+                _controller.center = new Vector3(_characterCenter.x, _characterCenter.y - subtract * 0.5f, _characterCenter.z);
+                _camera.localPosition = new Vector3(0, _cameraStartPosition.y - subtract, 0);
+            }
+            else
+            {
+                _controller.center = new Vector3(_characterCenter.x, _characterCenter.y + subtract * 0.5f, _characterCenter.z);
+                _camera.localPosition = new Vector3(0, _cameraStartPosition.y, 0);
+            }
         }
         else if (Input.GetKeyUp(KeyCode.LeftControl))
         {
-            float subtract = _characterHeight - _crouchHeight;
-            _controller.Move(Vector3.up * subtract);
             _controller.height = _characterHeight;
             _controller.center = _characterCenter;
+            _camera.localPosition = _cameraStartPosition;
         }
+        
         if (_gravity > 0f && _controller.velocity.y <= 0f)
         {
             _gravity = 0f;
